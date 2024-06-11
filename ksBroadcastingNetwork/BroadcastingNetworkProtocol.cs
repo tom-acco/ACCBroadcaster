@@ -51,6 +51,9 @@ namespace ksBroadcastingNetwork
         public delegate void ConnectionStateChangedDelegate(int connectionId, bool connectionSuccess, bool isReadonly, string error);
         public event ConnectionStateChangedDelegate OnConnectionStateChanged;
 
+        public delegate void DisconnectionDelegate();
+        public event DisconnectionDelegate OnDisconnect;
+
         public delegate void TrackDataUpdateDelegate(string sender, TrackData trackUpdate);
         public event TrackDataUpdateDelegate OnTrackDataUpdate;
 
@@ -391,6 +394,8 @@ namespace ksBroadcastingNetwork
             {
                 br.Write((byte)OutboundMessageTypes.UNREGISTER_COMMAND_APPLICATION); // First byte is always the command type
                 Send(ms.ToArray());
+
+                OnDisconnect?.Invoke();
             }
         }
 
