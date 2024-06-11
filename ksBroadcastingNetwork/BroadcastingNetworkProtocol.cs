@@ -393,6 +393,7 @@ namespace ksBroadcastingNetwork
             using (var br = new BinaryWriter(ms))
             {
                 br.Write((byte)OutboundMessageTypes.UNREGISTER_COMMAND_APPLICATION); // First byte is always the command type
+                br.Write((int)ConnectionId);
                 Send(ms.ToArray());
 
                 OnDisconnect?.Invoke();

@@ -43,7 +43,7 @@ namespace ksBroadcastingNetwork
 
         public void Shutdown()
         {
-            ShutdownAsnyc().ContinueWith(t =>
+            ShutdownAsync().ContinueWith(t =>
              {
                  if (t.Exception?.InnerExceptions?.Any() == true)
                      System.Diagnostics.Debug.WriteLine($"Client shut down with {t.Exception.InnerExceptions.Count} errors");
@@ -53,7 +53,7 @@ namespace ksBroadcastingNetwork
              });
         }
 
-        public async Task ShutdownAsnyc()
+        public async Task ShutdownAsync()
         {
             if (_listenerTask != null && !_listenerTask.IsCompleted)
             {

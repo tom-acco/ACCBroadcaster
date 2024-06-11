@@ -34,9 +34,10 @@ namespace ACCBroadcaster.Views.Broadcasting
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private async void myButton_Click(object sender, RoutedEventArgs e)
         {
-            ACCService.Client.Shutdown();
+            await ACCService.Client.ShutdownAsync();
+            ACCService.Client.Dispose();
         }
     }
 }
