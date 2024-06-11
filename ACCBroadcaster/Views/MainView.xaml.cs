@@ -68,6 +68,7 @@ namespace ACCBroadcaster.Views
             }
             ACCService.Client = new ACCUdpRemoteClient(ip, port, displayName, connectionPw, commandPw, updateInterval);
             ACCService.Client.MessageHandler.OnConnectionStateChanged += OnConnect;
+            ACCService.Client.MessageHandler.OnDisconnect += OnDisconnect;
         }
 
         private void OnConnect(int connectionId, bool connectionSuccess, bool isReadonly, string error)
@@ -79,6 +80,11 @@ namespace ACCBroadcaster.Views
             {
                 ErrorTextBlock.Text = error;
             }
+        }
+
+        private void OnDisconnect()
+        {
+            Frame.Navigate(typeof(MainView));
         }
     }
 }
